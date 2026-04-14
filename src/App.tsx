@@ -48,12 +48,15 @@ export default function App() {
           </div>
 
           <h1 className="font-display text-3xl md:text-5xl lg:text-6xl mb-8 leading-tight text-white">
-            Você já tentou de tudo para parar de sentir dor na mandíbula e nada funcionou? 
-            <span className="block mt-4 text-gold-light italic">O problema pode não ser o seu corpo, mas a forma como você está sendo tratado.</span>
+            Você convive com dor na mandíbula, estalos e tensão constante — e já tentou de tudo sem resultado duradouro.
           </h1>
 
-          <p className="font-sans text-lg md:text-xl text-white/80 mb-12 font-light max-w-[750px] leading-relaxed">
-            Recupere a liberdade de comer, falar e sorrir sem medo. Conheça o caminho estruturado e preciso para o alívio da DTM em Juiz de Fora, focado em tratar a causa real da sua dor — e não apenas os sintomas.
+          <p className="font-sans text-lg md:text-xl text-white/80 mb-6 font-light max-w-[750px] leading-relaxed">
+            O que falta não é força de vontade nem mais um remédio. É um diagnóstico preciso e um tratamento que trata você como um caso único — não como mais um paciente com DTM.
+          </p>
+
+          <p className="font-display text-xl md:text-2xl text-gold-light italic mb-12">
+            Recupere a liberdade de comer, falar e sorrir sem medo.
           </p>
 
           <motion.a
@@ -64,12 +67,16 @@ export default function App() {
             whileTap={{ scale: 0.98 }}
             className="bg-gold hover:bg-gold-light text-petrol-dark px-10 py-5 rounded-full font-sans font-medium transition-colors flex items-center gap-2 shadow-lg text-lg"
           >
-            Quero agendar minha avaliação inicial
+            Quero entender o que está causando minha dor
             <MessageCircle size={20} />
           </motion.a>
 
-          <p className="mt-12 font-sans text-[10px] text-white/30 uppercase tracking-[3px]">
-            Dra. Gisele Milão · CREFITO 126817-F | Juiz de Fora – MG
+          <p className="mt-8 font-sans text-[10px] text-white/50 uppercase tracking-[2px]">
+            Avaliação inicial completa · Sem compromisso · Juiz de Fora – MG
+          </p>
+          
+          <p className="mt-4 font-sans text-[9px] text-white/20 uppercase tracking-[3px]">
+            Dra. Gisele Milão · CREFITO 126817-F
           </p>
         </motion.div>
       </section>

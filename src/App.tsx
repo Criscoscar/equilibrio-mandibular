@@ -1,0 +1,324 @@
+import { motion } from "motion/react";
+import { MessageCircle, ChevronRight, HelpCircle, CheckCircle2, AlertCircle } from "lucide-react";
+import { useState } from "react";
+
+const WHATSAPP_PACIENTE = "https://wa.me/5532988748235?text=Olá%20Dra.%20Gisele%2C%20vim%20pelo%20link%20e%20gostaria%20de%20agendar%20uma%20avaliação.";
+const WHATSAPP_DENTISTA = "https://wa.me/5532988748235?text=Olá%20Dra.%20Gisele%2C%20sou%20dentista%20e%20gostaria%20de%20conversar%20sobre%20uma%20parceria.";
+
+function FAQItem({ question, answer }: { question: string, answer: string }) {
+  const [isOpen, setIsOpen] = useState(false);
+  return (
+    <div className="border-b border-gold/20 py-4">
+      <button 
+        onClick={() => setIsOpen(!isOpen)}
+        className="w-full flex items-center justify-between text-left hover:text-gold transition-colors"
+      >
+        <span className="font-sans font-medium text-petrol-dark">{question}</span>
+        <HelpCircle size={20} className={`text-gold transition-transform ${isOpen ? 'rotate-180' : ''}`} />
+      </button>
+      {isOpen && (
+        <motion.p 
+          initial={{ opacity: 0, height: 0 }}
+          animate={{ opacity: 1, height: 'auto' }}
+          className="mt-4 text-text-muted font-light leading-relaxed"
+        >
+          {answer}
+        </motion.p>
+      )}
+    </div>
+  );
+}
+
+export default function App() {
+  return (
+    <div className="min-h-screen bg-cream selection:bg-gold/30">
+      {/* 1. HERO */}
+      <section className="relative min-h-screen flex flex-col items-center justify-center bg-petrol-dark text-white px-6 overflow-hidden">
+        <div className="absolute top-[-10%] left-[-10%] w-[400px] h-[400px] border border-gold/10 rounded-full pointer-events-none" />
+        <div className="absolute bottom-[-10%] right-[-10%] w-[500px] h-[500px] border border-gold/10 rounded-full pointer-events-none" />
+
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="relative z-10 flex flex-col items-center text-center max-w-[900px]"
+        >
+          <div className="mb-8 px-4 py-1 border border-gold rounded-full">
+            <span className="section-label text-gold-light">Fisioterapia Especializada em DTM</span>
+          </div>
+
+          <h1 className="font-display text-3xl md:text-5xl lg:text-6xl mb-8 leading-tight text-white">
+            Você já tentou de tudo para parar de sentir dor na mandíbula e nada funcionou? 
+            <span className="block mt-4 text-gold-light italic">O problema pode não ser o seu corpo, mas a forma como você está sendo tratado.</span>
+          </h1>
+
+          <p className="font-sans text-lg md:text-xl text-white/80 mb-12 font-light max-w-[750px] leading-relaxed">
+            Recupere a liberdade de comer, falar e sorrir sem medo. Conheça o caminho estruturado e preciso para o alívio da DTM em Juiz de Fora, focado em tratar a causa real da sua dor — e não apenas os sintomas.
+          </p>
+
+          <motion.a
+            href={WHATSAPP_PACIENTE}
+            target="_blank"
+            rel="noopener noreferrer"
+            whileHover={{ y: -2 }}
+            whileTap={{ scale: 0.98 }}
+            className="bg-gold hover:bg-gold-light text-petrol-dark px-10 py-5 rounded-full font-sans font-medium transition-colors flex items-center gap-2 shadow-lg text-lg"
+          >
+            Quero agendar minha avaliação inicial
+            <MessageCircle size={20} />
+          </motion.a>
+
+          <p className="mt-12 font-sans text-[10px] text-white/30 uppercase tracking-[3px]">
+            Dra. Gisele Milão · CREFITO 126817-F | Juiz de Fora – MG
+          </p>
+        </motion.div>
+      </section>
+
+      {/* 3. VOCÊ SE IDENTIFICA COM ISSO? */}
+      <section className="py-24 px-6 bg-white flex justify-center">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="max-w-[800px] w-full"
+        >
+          <span className="section-label mb-6 block text-center">Sintomas</span>
+          <h2 className="title-display text-petrol-dark mb-12 text-center">Você se identifica com isso?</h2>
+          <p className="text-center text-text-muted mb-12 text-lg italic">Sinta se esta é a sua rotina atual:</p>
+          
+          <div className="space-y-8">
+            {[
+              { title: "O despertar cansado", desc: "Você acorda e sente que seu rosto trabalhou a noite toda. A mandíbula está pesada, travada ou dolorida logo cedo." },
+              { title: "O medo do \"estalo\"", desc: "Evita comer uma maçã ou bocejar em público por medo do barulho ou de a mandíbula \"sair do lugar\"." },
+              { title: "A dor de cabeça \"fantasma\"", desc: "Aquela pressão nas têmporas que nenhum analgésico comum parece resolver de verdade." },
+              { title: "A frustração do silêncio", desc: "Você tenta explicar a dor no ouvido ou o zumbido, mas os exames dizem que está tudo bem, enquanto o incômodo continua ali." },
+              { title: "O limite da placa", desc: "Você usa a placa de mordida e ela ajuda — mas percebe que a tensão, a dor e o travamento continuam aparecendo. Algo além da articulação ainda precisa de atenção." }
+            ].map((item, idx) => (
+              <div key={idx} className="flex gap-4 items-start bg-cream p-6 rounded-2xl border-l-4 border-gold">
+                <AlertCircle className="text-gold flex-shrink-0 mt-1" size={24} />
+                <div>
+                  <h3 className="font-sans font-bold text-petrol-dark mb-1">{item.title}</h3>
+                  <p className="text-text-muted font-light leading-relaxed">{item.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+      </section>
+
+      {/* 4. POR QUE NADA FUNCIONOU ATÉ AGORA? */}
+      <section className="py-24 px-6 bg-petrol-dark text-white flex justify-center">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="max-w-[800px] w-full"
+        >
+          <span className="section-label text-gold mb-6 block text-center">O Inimigo Oculto</span>
+          <h2 className="title-display mb-12 text-center">Por que nada funcionou até agora?</h2>
+          
+          <div className="space-y-8 text-lg font-light leading-relaxed text-white/80">
+            <p>
+              A maioria das pessoas que sofre com DTM cai no ciclo do <strong className="text-gold-light">"tratamento isolado"</strong>. O dentista foca apenas nos dentes, o médico foca apenas no remédio, e a fisioterapia comum foca apenas no relaxamento muscular.
+            </p>
+            <p>
+              O problema é que a DTM é <strong className="text-gold-light">multifatorial</strong>. Ela envolve sua postura, seus hábitos, seu sistema nervoso e como sua mandíbula se integra ao resto do corpo. Tentar resolver isso apenas com uma placa ou um relaxante muscular é como tentar consertar um carro desalinhado apenas trocando o pneu.
+            </p>
+            <div className="bg-white/5 border border-gold/20 p-8 rounded-2xl italic font-display text-2xl text-gold-light">
+              Sem um diagnóstico preciso que conecte todos esses pontos, você continuará gastando tempo e dinheiro em soluções temporárias.
+            </div>
+          </div>
+        </motion.div>
+      </section>
+
+      {/* 5. APRESENTAÇÃO DO MÉTODO */}
+      <section className="py-24 px-6 bg-white flex justify-center">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="max-w-[1000px] w-full grid grid-cols-1 md:grid-cols-2 gap-16 items-center"
+        >
+          <div className="order-2 md:order-1">
+            <span className="section-label mb-6 block">O Método</span>
+            <h2 className="font-display italic text-4xl md:text-5xl text-petrol-dark mb-10">
+              Conheça o Método Equilíbrio Mandibular Integrado
+            </h2>
+            
+            <div className="space-y-6 text-text leading-relaxed font-light text-lg">
+              <p>
+                Desenvolvido pela Dra. Gisele Milão, esta abordagem não é sobre "fazer massagem no rosto". É sobre <strong className="font-medium text-petrol">reeducação e reequilíbrio</strong>.
+              </p>
+              <p>
+                Nós não olhamos apenas para onde dói. Nós mapeamos como você se move, como você respira e como suas tensões acumuladas estão sobrecarregando sua articulação.
+              </p>
+              <div className="bg-cream p-6 rounded-xl border-l-4 border-gold italic font-display text-xl text-petrol-dark">
+                A transformação aqui é profunda: passamos da fase de "sobreviver à dor" para a fase de "esquecer que a dor existia".
+              </div>
+            </div>
+          </div>
+
+          <div className="order-1 md:order-2 flex justify-center">
+            <div className="relative w-full max-w-[400px] aspect-[4/5]">
+              <div className="absolute inset-0 border border-gold translate-x-4 translate-y-4 rounded-2xl -z-10 opacity-20" />
+              <div className="w-full h-full rounded-2xl overflow-hidden shadow-2xl">
+                <img 
+                  src="https://i.postimg.cc/X78kgNDg/Imagem-redimencionada.jpg" 
+                  alt="Dra. Gisele Milão" 
+                  className="w-full h-full object-cover"
+                  referrerPolicy="no-referrer"
+                />
+              </div>
+            </div>
+          </div>
+        </motion.div>
+      </section>
+
+      {/* 6. COMO FUNCIONA O PROCESSO */}
+      <section className="py-24 px-6 bg-cream flex justify-center">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="max-w-[800px] w-full"
+        >
+          <span className="section-label mb-4 block text-center">Passo a Passo</span>
+          <h2 className="title-display text-petrol-dark mb-12 text-center">Três passos simples para sua nova rotina</h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              { title: "Mapeamento de Causa", desc: "Uma avaliação detalhada onde eu escuto sua história e identifico os gatilhos específicos da sua dor." },
+              { title: "Intervenção de Precisão", desc: "Aplicamos técnicas manuais e exercícios terapêuticos desenhados exclusivamente para o seu tipo de DTM." },
+              { title: "Autonomia e Manutenção", desc: "Você aprende como gerenciar seu corpo para que os resultados sejam duradouros e você não dependa de consultórios para sempre." }
+            ].map((step, idx) => (
+              <div key={idx} className="bg-white p-8 rounded-2xl shadow-sm border border-gold/10 flex flex-col items-center text-center">
+                <div className="w-12 h-12 rounded-full bg-petrol-dark text-gold flex items-center justify-center font-display text-2xl mb-6">
+                  {idx + 1}
+                </div>
+                <h3 className="font-sans font-bold text-petrol-dark mb-4">{step.title}</h3>
+                <p className="text-text-muted font-light text-sm leading-relaxed">{step.desc}</p>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+      </section>
+
+      {/* 7. DEPOIMENTOS */}
+      <section className="py-24 px-6 bg-white flex justify-center">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="max-w-[1000px] w-full"
+        >
+          <span className="section-label mb-4 block text-center">Prova Social</span>
+          <h2 className="title-display text-petrol-dark mb-16 text-center">O que dizem nossos pacientes</h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              { name: "Fernanda R.", age: 38, job: "Servidora pública", city: "Juiz de Fora", text: "Vivia à base de analgésicos e tinha medo de comer em reuniões por causa dos estalos. Meu dentista já tinha me indicado a placa e ajudou bastante, mas ele mesmo percebeu que precisava de algo a mais e me encaminhou para a Dra. Gisele. Em 4 semanas eu já não lembrava o que era dor de cabeça. Hoje como de tudo e recuperei minha confiança." },
+              { name: "Camila S.", age: 44, job: "Professora", city: "Juiz de Fora", text: "Acordava todo dia com o rosto travado. Já estava em acompanhamento com meu dentista e usando a placa, mas ele identificou que minha tensão muscular e postura precisavam de atenção especializada. Me encaminhou para a Gisele e foi a peça que faltava. Hoje acordo descansada e com disposição — algo que não sentia há anos." },
+              { name: "Beatriz M.", age: 27, job: "Estudante de medicina", city: "Juiz de Fora", text: "Comecei a ter dor na mandíbula na época da faculdade e fui ignorando achando que era estresse. Quando os sintomas foram piorando — zumbido, dor no pescoço, dor de ouvido — fui ao dentista e ele já me encaminhou direto para a Dra. Gisele. O tratamento foi progressivo, sem pressa. Hoje estou sem sintomas e sei o que fazer para não deixar voltar." }
+            ].map((dep, idx) => (
+              <div key={idx} className="bg-cream p-8 rounded-2xl flex flex-col h-full">
+                <p className="italic text-text-muted mb-8 font-light leading-relaxed flex-grow">"{dep.text}"</p>
+                <div className="border-t border-gold/20 pt-4">
+                  <p className="font-sans font-bold text-petrol-dark">{dep.name}, {dep.age} anos</p>
+                  <p className="text-xs text-text-muted">{dep.job} · {dep.city}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+      </section>
+
+      {/* 8. CTA PRINCIPAL */}
+      <section className="py-24 px-6 bg-petrol-dark flex justify-center text-center">
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          className="max-w-[700px] w-full"
+        >
+          <h2 className="title-display text-white mb-8">Pronto para dar o primeiro passo para o seu alívio?</h2>
+          <p className="text-white/70 text-lg mb-12 font-light leading-relaxed">
+            Dê o primeiro passo para o seu alívio. Sem pressão, apenas uma conversa técnica e humana sobre o seu caso.
+          </p>
+          <motion.a
+            href={WHATSAPP_PACIENTE}
+            target="_blank"
+            rel="noopener noreferrer"
+            whileHover={{ y: -2 }}
+            whileTap={{ scale: 0.98 }}
+            className="inline-flex items-center gap-2 bg-gold hover:bg-gold-light text-petrol-dark px-10 py-5 rounded-full font-sans font-medium transition-colors shadow-xl text-lg"
+          >
+            Quero agendar minha avaliação inicial
+            <MessageCircle size={20} />
+          </motion.a>
+        </motion.div>
+      </section>
+
+      {/* 9. FAQ */}
+      <section className="py-24 px-6 bg-white flex justify-center">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="max-w-[700px] w-full"
+        >
+          <span className="section-label mb-4 block text-center">FAQ</span>
+          <h2 className="title-display text-petrol-dark mb-12 text-center">Perguntas Frequentes</h2>
+          
+          <div className="space-y-2">
+            <FAQItem 
+              question="Eu já uso placa, a fisioterapia vai ajudar?" 
+              answer="Sim! A placa protege os dentes, mas a fisioterapia trata os músculos e a articulação que movem esses dentes. Elas trabalham juntas para que, no futuro, você talvez nem precise mais da placa." 
+            />
+            <FAQItem 
+              question="Em quanto tempo vou sentir melhora?" 
+              answer='Embora cada caso seja único, a maioria dos pacientes relata um alívio significativo e uma sensação de "leveza" no rosto já nas primeiras 3 sessões.' 
+            />
+            <FAQItem 
+              question="O tratamento dói?" 
+              answer="Pelo contrário. O objetivo é o alívio. Utilizamos técnicas manuais precisas e suaves que visam desativar os pontos de dor, proporcionando conforto imediato." 
+            />
+          </div>
+        </motion.div>
+      </section>
+
+      {/* 10. CTA FINAL */}
+      <section className="py-24 px-6 bg-cream-dark flex justify-center text-center">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="max-w-[600px] w-full"
+        >
+          <h2 className="title-display text-petrol-dark mb-8">Ainda tem dúvida se o seu caso tem solução?</h2>
+          <p className="text-text-muted text-lg mb-12 font-light leading-relaxed">
+            Não continue tentando adivinhar. Clique no botão abaixo e fale diretamente comigo pelo WhatsApp. Vamos entender se o meu método é o ideal para você.
+          </p>
+          <motion.a
+            href={WHATSAPP_PACIENTE}
+            target="_blank"
+            rel="noopener noreferrer"
+            whileHover={{ y: -2 }}
+            whileTap={{ scale: 0.98 }}
+            className="inline-flex items-center gap-2 bg-petrol-dark hover:bg-petrol text-white px-10 py-5 rounded-full font-sans font-medium transition-colors shadow-xl mb-8"
+          >
+            Falar com a Dra. Gisele agora
+            <MessageCircle size={20} />
+          </motion.a>
+          <p className="text-text-muted text-xs uppercase tracking-widest mt-4">Atendimento humanizado e individualizado em Juiz de Fora</p>
+        </motion.div>
+      </section>
+
+      {/* FOOTER */}
+      <footer className="py-12 px-6 bg-petrol-dark text-center border-t border-white/5">
+        <p className="text-white/30 font-sans text-[10px] uppercase tracking-[2px] leading-loose max-w-[500px] mx-auto">
+          DRA. GISELE MILÃO DE CARVALHO COSTA · CREFITO 126817-F · FISIOTERAPIA EM DTM E DOR OROFACIAL
+        </p>
+      </footer>
+    </div>
+  );
+}

@@ -68,10 +68,6 @@ export default function App() {
             O que falta não é força de vontade nem mais um remédio. É um diagnóstico preciso e um tratamento que trata você como um caso único — não como mais um paciente com DTM.
           </p>
 
-          <p className="font-display text-xl md:text-2xl text-gold-light italic mb-12">
-            Recupere a liberdade de comer, falar e sorrir sem medo.
-          </p>
-
           <motion.a
             href={WHATSAPP_PACIENTE}
             target="_blank"
@@ -84,11 +80,15 @@ export default function App() {
             <WhatsAppIcon size={20} />
           </motion.a>
 
+          <p className="mt-12 font-display text-xl md:text-2xl text-gold-light italic">
+            Recupere a liberdade de comer, falar e sorrir sem medo.
+          </p>
+
           <p className="mt-8 font-sans text-[10px] text-white/50 uppercase tracking-[2px]">
             Avaliação inicial completa · Sem compromisso · Juiz de Fora – MG
           </p>
           
-          <p className="mt-4 font-sans text-[9px] text-white/20 uppercase tracking-[3px]">
+          <p className="mt-4 font-sans text-[9px] text-white/30 uppercase tracking-[3px]">
             Dra. Gisele Milão · CREFITO 126817-F
           </p>
         </motion.div>
@@ -170,7 +170,7 @@ export default function App() {
                 Desenvolvido pela Dra. Gisele Milão, esta abordagem não é sobre "fazer massagem no rosto". É sobre <strong className="font-medium text-petrol">reeducação e reequilíbrio</strong>.
               </p>
               <p>
-                Nós não olhamos apenas para onde dói. Nós mapeamos como você se move, como você respira e como suas tensões acumuladas estão sobrecarregando sua articulação.
+                Eu não olho apenas para onde dói. Eu mapeio como você se move, como você respira e como suas tensões acumuladas estão sobrecarregando sua articulação.
               </p>
               <div className="bg-cream p-6 rounded-xl border-l-4 border-gold italic font-display text-xl text-petrol-dark">
                 A transformação aqui é profunda: passamos da fase de "sobreviver à dor" para a fase de "esquecer que a dor existia".
@@ -304,7 +304,7 @@ export default function App() {
             />
             <FAQItem 
               question="O tratamento dói?" 
-              answer="Não. Todas as técnicas utilizadas são não invasivas e adaptadas à sensibilidade de cada paciente. O objetivo é aliviar a dor — não gerar mais desconforto. Alguns pacientes relatam uma leve sensação de pressão durante o trabalho muscular, mas nada que cause desconforto significativo." 
+              answer="Não. Todas as técnicas utilizadas não são invasivas e adaptadas à sensibilidade de cada paciente. O objetivo é aliviar a dor — não gerar mais desconforto. Alguns pacientes relatam uma leve sensação de pressão durante o trabalho muscular, mas nada que cause desconforto significativo." 
             />
             <FAQItem 
               question="Meu caso é muito grave. Ainda tem solução?" 

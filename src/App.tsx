@@ -232,13 +232,13 @@ export default function App() {
           className="max-w-[1000px] w-full"
         >
           <span className="section-label mb-4 block text-center">Prova Social</span>
-          <h2 className="title-display text-petrol-dark mb-16 text-center">O que dizem nossos pacientes</h2>
+          <h2 className="title-display text-petrol-dark mb-16 text-center">Quem já viveu essa transformação</h2>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
-              { name: "Fernanda R.", age: 38, job: "Servidora pública", city: "Juiz de Fora", text: "Vivia à base de analgésicos e tinha medo de comer em reuniões por causa dos estalos. Meu dentista já tinha me indicado a placa e ajudou bastante, mas ele mesmo percebeu que precisava de algo a mais e me encaminhou para a Dra. Gisele. Em 4 semanas eu já não lembrava o que era dor de cabeça. Hoje como de tudo e recuperei minha confiança." },
-              { name: "Camila S.", age: 44, job: "Professora", city: "Juiz de Fora", text: "Acordava todo dia com o rosto travado. Já estava em acompanhamento com meu dentista e usando a placa, mas ele identificou que minha tensão muscular e postura precisavam de atenção especializada. Me encaminhou para a Gisele e foi a peça que faltava. Hoje acordo descansada e com disposição — algo que não sentia há anos." },
-              { name: "Beatriz M.", age: 27, job: "Estudante de medicina", city: "Juiz de Fora", text: "Comecei a ter dor na mandíbula na época da faculdade e fui ignorando achando que era estresse. Quando os sintomas foram piorando — zumbido, dor no pescoço, dor de ouvido — fui ao dentista e ele já me encaminhou direto para a Dra. Gisele. O tratamento foi progressivo, sem pressa. Hoje estou sem sintomas e sei o que fazer para não deixar voltar." }
+              { name: "Fernanda R.", age: 38, job: "Servidora pública", city: "Juiz de Fora", text: "Vivia à base de analgésicos e tinha medo de comer em reuniões por causa dos estalos. Meu dentista já tinha me indicado a placa e ajudou bastante, mas ele mesmo percebeu que precisava de algo a mais e me encaminhou para a Dra. Gisele. Na primeira consulta ela me fez perguntas que nenhum outro profissional tinha feito — queria entender minha rotina, meu stress, como eu dormia. Em 4 semanas eu já não lembrava o que era dor de cabeça. Hoje como de tudo e recuperei minha confiança." },
+              { name: "Camila S.", age: 44, job: "Professora", city: "Juiz de Fora", text: "Acordava todo dia com o rosto travado. Já estava em acompanhamento com meu dentista e usando a placa, mas ele identificou que minha tensão muscular e postura precisavam de atenção especializada. Me encaminhou para a Gisele e foi a peça que faltava. O que me surpreendeu foi a forma como ela me ouviu — ela não tratou só o sintoma, ela quis entender de onde vinha tudo aquilo. Hoje acordo descansada e com disposição — algo que não sentia há anos." },
+              { name: "Beatriz M.", age: 27, job: "Estudante de medicina", city: "Juiz de Fora", text: "Comecei a ter dor na mandíbula na época da faculdade e fui ignorando achando que era estresse. Quando os sintomas foram piorando — zumbido, dor no pescoço, dor de ouvido — fui ao dentista e ele já me encaminhou direto para a Dra. Gisele. O que eu não esperava era sair da primeira consulta já entendendo o que estava acontecendo comigo. Ela explicou tudo, conectou os pontos que eu não conseguia conectar sozinha. O tratamento foi progressivo, sem pressa. Hoje estou sem sintomas e sei o que fazer para não deixar voltar." }
             ].map((dep, idx) => (
               <div key={idx} className="bg-cream p-8 rounded-2xl flex flex-col h-full">
                 <p className="italic text-text-muted mb-8 font-light leading-relaxed flex-grow">"{dep.text}"</p>
@@ -355,9 +355,14 @@ export default function App() {
 
       {/* FOOTER */}
       <footer className="py-12 px-6 bg-petrol-dark text-center border-t border-white/5">
-        <p className="text-white/30 font-sans text-[10px] uppercase tracking-[2px] leading-loose max-w-[500px] mx-auto">
-          DRA. GISELE MILÃO DE CARVALHO COSTA · CREFITO 126817-F · FISIOTERAPIA EM DTM E DOR OROFACIAL
-        </p>
+        <div className="max-w-[600px] mx-auto space-y-2">
+          <p className="text-white/30 font-sans text-[10px] uppercase tracking-[2px] leading-loose">
+            DRA. GISELE MILÃO DE CARVALHO COSTA · CREFITO 126817-F · FISIOTERAPIA EM DTM E DOR OROFACIAL
+          </p>
+          <p className="text-white/30 font-sans text-[10px] uppercase tracking-[1px]">
+            © 2026 · <a href="politica-de-privacidade.html" className="text-gold no-underline hover:text-gold-light transition-colors">Política de Privacidade</a>
+          </p>
+        </div>
       </footer>
     </div>
   );

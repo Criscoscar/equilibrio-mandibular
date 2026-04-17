@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dra. Gisele Milão - Fisioterapia em DTM e Dor Orofacial</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/framer-motion@10.16.4/dist/framer-motion.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { 
+                        display: ["Cormorant Garamond", "serif"], 
+                        sans: ["DM Sans", "sans-serif"] 
+                    },
+                    colors: { 
+                        petrol: { dark: "#0d2e3a", DEFAULT: "#1a4a5c" }, 
+                        gold: { light: "#d4b07a", DEFAULT: "#b8975a" }, 
+                        cream: { DEFAULT: "#f7f3ee", dark: "#ede7de" } 
+                    }
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer base {
+            body { @apply font-sans text-[#1c1c1c] bg-[#f7f3ee] antialiased; }
+        }
+        .faq-answer { max-height: 0; overflow: hidden; transition: all 0.4s ease-out; opacity: 0; }
+        .faq-answer.open { max-height: 500px; padding-bottom: 24px; opacity: 1; }
+    </style>
+</head>
+<body>
+
+    <!-- HERO -->
+    <section class="relative min-h-screen flex flex-col items-center justify-center bg-[#0d2e3a] text-white px-6 text-center overflow-hidden">
+        <div class="absolute inset-0 opacity-20 pointer-events-none">
+            <div class="absolute top-0 right-0 w-[800px] h-[800px] bg-[#b8975a] rounded-full blur-[160px] -translate-y-1/2 translate-x-1/2"></div>
+            <div class="absolute bottom-0 left-0 w-[600px] h-[600px] bg-[#1a4a5c] rounded-full blur-[140px] translate-y-1/2 -translate-x-1/2"></div>
+        </div>
+        <div class="relative z-10 flex flex-col items-center max-w-[1100px]">
+            <div class="mb-10 px-6 py-2 border border-[#b8975a]/40 rounded-full inline-block backdrop-blur-sm">
+                <span class="text-[10px] tracking-[5px] uppercase text-[#d4b07a] font-bold">Fisioterapia Especializada em DTM</span>
+            </div>
+            <h1 class="font-display text-5xl md:text-7xl lg:text-8xl leading-[1] mb-10 tracking-tight">Você convive com dor na mandíbula <span class="text-[#d4b07a] italic">e já tentou de tudo.</span></h1>
+            <p class="text-xl md:text-2xl text-white/70 mb-14 font-light max-w-[800px] leading-relaxed mx-auto">O que falta não é força de vontade nem mais um remédio. É um diagnóstico preciso e um tratamento que trata você como um caso único — não como mais um paciente com DTM.</p>
+            <a href="https://wa.me/5532988748235?text=Olá%20Dra.%20Gisele%20gostaria%20de%20agendar%20uma%20avaliação" target="_blank" class="bg-[#b8975a] hover:bg-[#d4b07a] text-[#0d2e3a] px-12 py-6 rounded-full font-bold transition-transform hover:scale-105 flex items-center gap-4 shadow-2xl text-2xl">Quero entender minha dor</a>
+            <p class="mt-14 font-display text-2xl text-[#d4b07a] italic opacity-80">Recupere a liberdade de comer, falar e sorrir sem medo.</p>
+            <div class="mt-20 flex flex-wrap justify-center gap-x-10 gap-y-4 opacity-40 text-[9px] uppercase tracking-[4px] font-bold border-t border-white/10 pt-10 w-full max-w-2xl">
+                <span>Avaliação completa</span>
+                <span>Juiz de Fora – MG</span>
+                <span>Dra. Gisele Milão</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- SINTOMAS -->
+    <section class="py-40 px-6 bg-white flex justify-center">
+        <div class="max-w-[1100px] w-full text-center">
+            <span class="text-[10px] tracking-[5px] uppercase text-[#b8975a] font-bold mb-6 block">Sintomatologia</span>
+            <h2 class="font-display italic text-6xl md:text-8xl text-[#1a4a5c] leading-none mb-28">Sinta se esta é a sua rotina:</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10 text-left">
+                <div class="bg-[#f7f3ee] p-12 rounded-[50px] border-l-[12px] border-[#b8975a]">
+                    <h3 class="font-bold text-[#1a4a5c] mb-5 text-2xl">O despertar cansado</h3>
+                    <p class="text-gray-600 font-light text-xl leading-relaxed">Você acorda e sente que seu rosto trabalhou a noite toda. A mandíbula está pesada, travada ou dolorida logo cedo.</p>
+                </div>
+                <div class="bg-[#f7f3ee] p-12 rounded-[50px] border-l-[12px] border-[#b8975a]">
+                    <h3 class="font-bold text-[#1a4a5c] mb-5 text-2xl">O medo do "estalo"</h3>
+                    <p class="text-gray-600 font-light text-xl leading-relaxed">Evita comer uma maçã ou bocejar em público por medo do barulho ou de a mandíbula "sair do lugar" ou travar.</p>
+                </div>
+                <div class="bg-[#f7f3ee] p-12 rounded-[50px] border-l-[12px] border-[#b8975a]">
+                    <h3 class="font-bold text-[#1a4a5c] mb-5 text-2xl">O limite da placa</h3>
+                    <p class="text-gray-600 font-light text-xl leading-relaxed">Você usa a placa de mordida e ela ajuda — mas percebe que a tensão muscular e a dor continuam aparecendo.</p>
+                </div>
+                <div class="bg-[#f7f3ee] p-12 rounded-[50px] border-l-[12px] border-[#b8975a]">
+                    <h3 class="font-bold text-[#1a4a5c] mb-5 text-2xl">A dor de cabeça que não passa</h3>
+                    <p class="text-gray-600 font-light text-xl leading-relaxed">Dores na têmpora ou atrás dos olhos que parecem enxaqueca, mas que remédios comuns não resolvem.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MÉTODO -->
+    <section class="py-40 px-6 bg-[#f7f3ee] flex justify-center">
+        <div class="max-w-[1200px] w-full grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
+            <div class="relative">
+                <div class="rounded-[80px] overflow-hidden shadow-2xl border-[15px] border-white">
+                    <img src="https://i.postimg.cc/X78kgNDg/Imagem-redimencionada.jpg" alt="Dra. Gisele Milão" class="w-full h-auto">
+                </div>
+                <div class="mt-12 text-center">
+                    <p class="font-display italic text-[#1a4a5c] text-4xl mb-3">Dra. Gisele Milão</p>
+                    <p class="text-[#b8975a] font-bold tracking-[4px] uppercase text-[10px]">Especialista em DTM · CREFITO 126817-F</p>
+                </div>
+            </div>
+            <div>
+                <span class="text-[10px] tracking-[4px] uppercase text-[#b8975a] font-bold mb-8 block">A Abordagem</span>
+                <h2 class="font-display text-6xl md:text-8xl text-[#1a4a5c] leading-tight mb-14 tracking-tight">Método <span class="italic text-[#b8975a]">Equilíbrio Integrado</span></h2>
+                <div class="space-y-12 text-2xl text-gray-700 font-light">
+                    <p>Minha prática é focada não apenas em aliviar a dor momentânea, mas em identificar as <strong>disfunções musculares e articulares</strong> que impedem sua qualidade de vida.</p>
+                    <div class="pt-12 italic font-display text-3xl text-[#b8975a] border-t border-[#b8975a]/30">"Saímos da fase de sobrevivência à dor para a fase onde a liberdade é o novo normal."</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DEPOIMENTOS -->
+    <section class="py-40 px-6 bg-white flex justify-center text-center">
+        <div class="max-w-[1200px] w-full">
+            <span class="text-[10px] tracking-[5px] uppercase text-[#b8975a] font-bold mb-8 block">Resultados Reais</span>
+            <h2 class="font-display text-6xl md:text-8xl text-[#1a4a5c] italic mb-32">Depoimentos</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 text-left">
+                <div class="bg-[#f7f3ee] p-14 rounded-[60px]">
+                    <p class="italic text-gray-700 mb-10 font-light text-2xl leading-relaxed">"Em 4 semanas eu já não lembrava o que era dor de cabeça. Antes, eu dependia de analgésicos todos os dias."</p>
+                    <p class="font-bold text-[#1a4a5c] text-xl">Fernanda R., 38 anos</p>
+                </div>
+                <div class="bg-[#f7f3ee] p-14 rounded-[60px]">
+                    <p class="italic text-gray-700 mb-10 font-light text-2xl leading-relaxed">"Eu tinha pavor de bocejar em público pelos estalos. O tratamento me deu segurança e hoje sorrio sem medo."</p>
+                    <p class="font-bold text-[#1a4a5c] text-xl">Camila S., 44 anos</p>
+                </div>
+                <div class="bg-[#f7f3ee] p-14 rounded-[60px]">
+                    <p class="italic text-gray-700 mb-10 font-light text-2xl leading-relaxed">"O método da Dra. Gisele é diferente de tudo que já tentei. É focado na causa profunda."</p>
+                    <p class="font-bold text-[#1a4a5c] text-xl">Beatriz M., 27 anos</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="py-40 px-6 bg-[#f7f3ee] flex justify-center">
+        <div class="max-w-[900px] w-full">
+            <div class="text-center mb-24">
+                <span class="text-[10px] tracking-[5px] uppercase text-[#b8975a] font-bold mb-6 block">Esclarecimentos</span>
+                <h2 class="font-display italic text-6xl md:text-7xl text-[#1a4a5c]">Dúvidas Frequentes</h2>
+            </div>
+            <div class="space-y-6">
+                <div class="border-b border-[#b8975a]/20">
+                    <button onclick="toggleFaq(this)" class="w-full flex justify-between items-center text-left py-7 text-2xl font-display font-medium text-[#1a4a5c]">
+                        <span>Fisioterapia realmente trata DTM?</span>
+                        <span class="text-[#b8975a]">+</span>
+                    </button>
+                    <div class="faq-answer text-gray-600 text-lg font-light">Sim! Enquanto o dentista cuida da estrutura dentária, o fisioterapeuta especializado cuida da função muscular e articular.</div>
+                </div>
+                <div class="border-b border-[#b8975a]/20">
+                    <button onclick="toggleFaq(this)" class="w-full flex justify-between items-center text-left py-7 text-2xl font-display font-medium text-[#1a4a5c]">
+                        <span>Quantas sessões são necessárias?</span>
+                        <span class="text-[#b8975a]">+</span>
+                    </button>
+                    <div class="faq-answer text-gray-600 text-lg font-light">Cada caso é único. Após a avaliação biopsicossocial completa, montamos um plano de metas específico para você.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="py-24 bg-[#0d2e3a] text-center px-6">
+        <p class="text-white/40 text-[11px] uppercase tracking-[4px] font-bold mb-4">DRA. GISELE MILÃO DE CARVALHO COSTA · CREFITO 126817-F</p>
+        <p class="text-white/30 text-[11px] font-bold tracking-[3px]">© 2026 · <a href="politica-de-privacidade.html" style="color:#b8975a; text-decoration: none;">Política de Privacidade</a></p>
+    </footer>
+
+    <script>
+        function toggleFaq(btn) {
+            const answer = btn.nextElementSibling;
+            const icon = btn.querySelector('span:last-child');
+            answer.classList.toggle('open');
+            icon.textContent = answer.classList.contains('open') ? '−' : '+';
+        }
+    </script>
+</body>
+</html>

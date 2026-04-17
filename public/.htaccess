@@ -1,4 +1,11 @@
 Options -MultiViews
 RewriteEngine On
-RewriteCond %{REQUEST_FILENAME} !-f
+RewriteBase /
+
+# Se o arquivo físico ou diretório existir, não aplique a regra de redirecionamento
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# Caso contrário, redirecione tudo para o index.html (suporte para SPA)
 RewriteRule ^ index.html [QSA,L]

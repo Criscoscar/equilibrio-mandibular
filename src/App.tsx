@@ -360,7 +360,7 @@ export default function App() {
             DRA. GISELE MILÃO DE CARVALHO COSTA · CREFITO 126817-F · FISIOTERAPIA EM DTM E DOR OROFACIAL
           </p>
           <p className="text-white/30 font-sans text-[10px] uppercase tracking-[1px]">
-            © 2026 · <a href="politica-de-privacidade.html" className="text-gold no-underline hover:text-gold-light transition-colors">Política de Privacidade</a>
+            © 2026 · <a href="/politica-de-privacidade.html" className="text-gold no-underline hover:text-gold-light transition-colors">Política de Privacidade</a>
           </p>
         </div>
       </footer>

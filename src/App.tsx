@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { motion } from 'motion/react';
 
-// --- Components ---
+// --- Icons (Same as before) ---
 
 const WhatsAppIcon = () => (
   <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
@@ -17,8 +18,17 @@ const WarningIcon = () => (
   </svg>
 );
 
-const FadeIn = ({ children }: { children: React.ReactNode }) => (
+const ChevronLeft = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <polyline points="15 18 9 12 15 6" />
+  </svg>
+);
+
+// --- Basic Components ---
+
+const FadeIn = ({ children, key }: { children: React.ReactNode; key?: React.Key }) => (
   <motion.div
+    key={key}
     initial={{ opacity: 0, y: 30 }}
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true, amount: 0.1 }}
@@ -28,13 +38,13 @@ const FadeIn = ({ children }: { children: React.ReactNode }) => (
   </motion.div>
 );
 
-const FAQItem = ({ question, answer }: { key?: React.Key; question: string; answer: string }) => {
+const FAQItem = ({ question, answer }: { question: string; answer: string }) => {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <div className={`faq-item ${isOpen ? 'open' : ''}`}>
       <button className="faq-btn" onClick={() => setIsOpen(!isOpen)}>
         <span>{question}</span>
-        <span className="faq-icon">⌄</span>
+        <span className="faq-icon" style={{ transform: isOpen ? 'rotate(180deg)' : 'none' }}>⌄</span>
       </button>
       <div className="faq-answer" style={{ maxHeight: isOpen ? '500px' : '0', paddingBottom: isOpen ? '24px' : '0' }}>
         {answer}
@@ -43,18 +53,15 @@ const FAQItem = ({ question, answer }: { key?: React.Key; question: string; answ
   );
 };
 
-// --- App ---
+// --- Page Components ---
 
-export default function App() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+const Home = () => {
   const whatsappUrl = "https://wa.me/5532988748235?text=Olá%20Dra.%20Gisele%2C%20vim%20pelo%20link%20e%20gostaria%20de%20agendar%20uma%20avaliação.";
 
   return (
-    <div className="min-h-screen">
-      
+    <>
       {/* HERO */}
       <section id="hero" className="flex flex-col items-center justify-center relative min-h-screen bg-petrol-dark text-white text-center px-6 py-[60px] overflow-hidden">
-        {/* Pseudo-elements represented as absolute divs */}
         <div className="absolute top-[-10%] left-[-10%] w-[400px] h-[400px] border border-gold/10 rounded-full pointer-events-none" />
         <div className="absolute bottom-[-10%] right-[-10%] w-[500px] h-[500px] border border-gold/10 rounded-full pointer-events-none" />
         
@@ -63,17 +70,17 @@ export default function App() {
             <span className="hero-badge mb-8 px-5 py-1 border border-gold rounded-full text-[10px] tracking-[3px] uppercase text-gold-light">
               Fisioterapia Especializada em DTM
             </span>
-            <h1 className="font-display text-[clamp(2rem,5vw,3.5rem)] leading-[1.2] mb-8 text-white">
+            <h1 className="font-display text-[clamp(2.3rem,5vw,3.5rem)] leading-[1.2] mb-8 text-white">
               Você convive com dor na mandíbula, estalos e tensão constante — e já tentou de tudo sem resultado duradouro.
             </h1>
-            <p className="text-[clamp(1rem,2.5vw,1.2rem)] text-white/80 font-light max-w-[750px] mb-10 leading-[1.8]">
+            <p className="text-[clamp(1.1rem,2.5vw,1.3rem)] text-white/80 font-light max-w-[750px] mb-10 leading-[1.8]">
               O que falta não é força de vontade nem mais um remédio. É um diagnóstico preciso e um tratamento que trata você como um caso único — não como mais um paciente com DTM.
             </p>
             <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="btn-gold">
               Quero entender o que está causando minha dor
               <WhatsAppIcon />
             </a>
-            <p className="hero-italic mt-12 font-display italic text-2xl text-gold-light">
+            <p className="hero-italic mt-12 font-display italic text-3xl text-gold-light">
               Recupere a liberdade de comer, falar e sorrir sem medo.
             </p>
             <p className="hero-meta mt-4 text-[9px] text-white/30 tracking-[3px] uppercase">
@@ -92,7 +99,7 @@ export default function App() {
           <FadeIn>
             <span className="section-label">Sintomas</span>
             <h2 className="title-display italic">Você se identifica com isso?</h2>
-            <p className="text-text-muted italic text-[1.05rem] mb-2 font-display">Sinta se esta é a sua rotina atual:</p>
+            <p className="text-text-muted italic text-[1.1rem] mb-2 font-display">Sinta se esta é a sua rotina atual:</p>
             <div className="mt-12 flex flex-col gap-5 max-w-[800px] mx-auto text-left">
               {[
                 { title: "O despertar cansado", text: "Você acorda e sente que seu rosto trabalhou a noite toda. A mandíbula está pesada, travada ou dolorida logo cedo." },
@@ -105,7 +112,7 @@ export default function App() {
                   <WarningIcon />
                   <div>
                     <h3 className="font-sans font-bold text-petrol-dark mb-1.5 text-base">{s.title}</h3>
-                    <p className="text-text-muted font-light text-[0.95rem] leading-[1.7]">{s.text}</p>
+                    <p className="text-text-muted font-light text-[1rem] leading-[1.7]">{s.text}</p>
                   </div>
                 </div>
               ))}
@@ -127,7 +134,7 @@ export default function App() {
               <p className="text-lg font-light leading-[1.8] text-white/80 mb-6">
                 O problema é que a DTM é <strong className="text-gold-light font-medium">multifatorial</strong>. Ela envolve sua postura, seus hábitos, seu sistema nervoso e como sua mandíbula se integra ao resto do corpo. Tentar resolver isso apenas com uma placa ou um relaxante muscular é como tentar consertar um carro desalinhado apenas trocando o pneu.
               </p>
-              <div className="quote-dark mt-2 border border-gold/20 p-8 rounded-2xl bg-white/5 font-display italic text-[1.4rem] text-gold-light leading-relaxed">
+              <div className="quote-dark mt-2 border border-gold/20 p-8 rounded-2xl bg-white/5 font-display italic text-[1.5rem] text-gold-light leading-relaxed">
                 Sem um diagnóstico preciso que conecte todos esses pontos, você continuará gastando tempo e dinheiro em soluções temporárias.
               </div>
             </div>
@@ -142,21 +149,20 @@ export default function App() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
               <div className="text-left">
                 <span className="section-label">O Método</span>
-                <h2 className="font-display italic text-[clamp(1.8rem,4vw,2.8rem)] text-petrol-dark mb-8 leading-tight">
+                <h2 className="font-display italic text-[clamp(2rem,4vw,3rem)] text-petrol-dark mb-8 leading-tight">
                   Conheça o Método Equilíbrio Mandibular Integrado
                 </h2>
-                <p className="font-light leading-[1.8] mb-5 text-[1.05rem]">
+                <p className="font-light leading-[1.8] mb-5 text-[1.1rem]">
                   Desenvolvido pela Dra. Gisele Milão, esta abordagem não é sobre "fazer massagem no rosto". É sobre <strong className="text-petrol font-medium">reeducação e reequilíbrio</strong>.
                 </p>
-                <p className="font-light leading-[1.8] mb-5 text-[1.05rem]">
+                <p className="font-light leading-[1.8] mb-5 text-[1.1rem]">
                   Eu não olho apenas para onde dói. Eu mapeio como você se move, como você respira e como suas tensões acumuladas estão sobrecarregando sua articulação.
                 </p>
-                <div className="quote-cream bg-cream p-6 border-l-4 border-gold rounded-xl font-display italic text-2xl text-petrol-dark leading-snug mt-6">
+                <div className="quote-cream bg-cream p-6 border-l-4 border-gold rounded-xl font-display italic text-2xl text-petrol-dark leading-snug mt-10">
                   A transformação aqui é profunda: passamos da fase de "sobreviver à dor" para a fase de "esquecer que a dor existia".
                 </div>
               </div>
               <div className="metodo-img-wrap relative w-full max-w-[400px] mx-auto md:order-last order-first">
-                {/* Visual shadow effect using the wrapper before pseudo-class styling defined in CSS */}
                 <img 
                   src="https://i.postimg.cc/X78kgNDg/Imagem-redimencionada.jpg" 
                   alt="Dra. Gisele Milão" 
@@ -174,7 +180,7 @@ export default function App() {
           <FadeIn>
             <span className="section-label">Passo a Passo</span>
             <h2 className="title-display italic">Três passos simples para sua nova rotina</h2>
-            <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-[800px] mx-auto">
+            <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-[850px] mx-auto">
               {[
                 { n: "1", t: "Mapeamento de Causa", d: "Uma avaliação detalhada onde eu escuto sua história e identifico os gatilhos específicos da sua dor." },
                 { n: "2", t: "Intervenção de Precisão", d: "Aplicamos técnicas manuais e exercícios terapêuticos desenhados exclusivamente para o seu tipo de DTM." },
@@ -183,7 +189,7 @@ export default function App() {
                 <div key={i} className="passo-card bg-white p-8 rounded-2xl shadow-sm border border-gold/10 flex flex-col items-center">
                   <div className="passo-num w-12 h-12 bg-petrol-dark text-gold font-display text-2xl flex items-center justify-center rounded-full mb-5 shrink-0">{p.n}</div>
                   <h3 className="font-sans font-bold text-petrol-dark mb-3 text-base">{p.t}</h3>
-                  <p className="text-text-muted font-light text-[0.9rem] leading-relaxed">{p.d}</p>
+                  <p className="text-text-muted font-light text-[0.95rem] leading-relaxed">{p.d}</p>
                 </div>
               ))}
             </div>
@@ -233,7 +239,7 @@ export default function App() {
         <div className="container">
           <FadeIn>
             <div className="max-w-[700px] mx-auto">
-              <h2 className="font-display text-[clamp(1.8rem,4vw,2.8rem)] text-white mb-6">Pronto para dar o primeiro passo para o seu alívio?</h2>
+              <h2 className="font-display text-[clamp(2rem,4vw,3rem)] text-white mb-6">Pronto para dar o primeiro passo para o seu alívio?</h2>
               <p className="text-white/70 text-lg font-light leading-[1.8] mb-10">Dê o primeiro passo para o seu alívio. Sem pressão, apenas uma conversa técnica e humana sobre o seu caso.</p>
               <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="btn-gold">
                 Quero agendar minha avaliação inicial
@@ -250,7 +256,7 @@ export default function App() {
           <FadeIn>
             <span className="section-label">FAQ</span>
             <h2 className="title-display italic">Perguntas Frequentes</h2>
-            <div className="mt-12 max-w-[700px] mx-auto text-left">
+            <div className="mt-12 max-w-[800px] mx-auto text-left">
               {[
                 { q: "Fisioterapia realmente trata DTM? Achei que era coisa só de dentista.", a: "A fisioterapia e a odontologia atuam em conjunto no tratamento da DTM. Enquanto o dentista cuida da oclusão e da estrutura dental, a fisioterapeuta trata os músculos, a postura, a tensão e os padrões de movimento que alimentam a dor. Um complementa o outro — e é exatamente por isso que muitos dentistas encaminham seus pacientes para a Dra. Gisele." },
                 { q: "Eu já uso placa. A fisioterapia vai ajudar?", a: "Sim — e muito. A placa é uma ferramenta importante, mas ela age principalmente na proteção dos dentes. A fisioterapia atua nas causas musculares e posturais que continuam gerando tensão mesmo com o uso da placa. A combinação dos dois tratamentos costuma acelerar significativamente a recuperação." },
@@ -261,7 +267,9 @@ export default function App() {
                 { q: "Como funciona a primeira consulta?", a: "A avaliação inicial é completa — inclui escuta ativa do seu histórico, avaliação postural, funcional da mandíbula e do pescoço. Ao final você já tem clareza sobre o que está causando sua dor e qual é o plano de tratamento indicado para o seu caso. Não é uma consulta de triagem — é o início do processo." },
                 { q: "Preciso de encaminhamento médico ou odontológico?", a: "Não. Você pode agendar diretamente pelo WhatsApp, sem necessidade de encaminhamento. Se você já está em acompanhamento com um dentista, ótimo — o tratamento vai complementar o que ele está fazendo." }
               ].map((faq, i) => (
-                <FAQItem key={i} question={faq.q} answer={faq.a} />
+                <FadeIn key={i}>
+                  <FAQItem question={faq.q} answer={faq.a} />
+                </FadeIn>
               ))}
             </div>
           </FadeIn>
@@ -273,89 +281,122 @@ export default function App() {
         <div className="container">
           <FadeIn>
             <div className="max-w-[700px] mx-auto">
-              <h2 className="font-display italic text-[clamp(1.8rem,4vw,2.8rem)] text-petrol-dark mb-6">Ainda tem dúvida se o seu caso tem solução?</h2>
+              <h2 className="font-display italic text-[clamp(2rem,4vw,3rem)] text-petrol-dark mb-6">Ainda tem dúvida se o seu caso tem solução?</h2>
               <p className="text-text-muted text-lg font-light leading-[1.8] mb-10 max-w-[500px] mx-auto">Não continue tentando adivinhar. Clique no botão abaixo e fale diretamente comigo pelo WhatsApp. Vamos entender se o meu método é o ideal para você.</p>
               <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="btn-dark">
                 Falar com a Dra. Gisele agora
                 <WhatsAppIcon />
               </a>
-              <p className="mt-4 text-[10px] text-text-muted uppercase tracking-[2px]">Atendimento humanizado e individualizado em Juiz de Fora</p>
+              <p className="mt-8 text-[11px] text-text-muted uppercase tracking-[2px]">Atendimento humanizado e individualizado em Juiz de Fora</p>
             </div>
           </FadeIn>
         </div>
       </section>
 
-      {/* FOOTER */}
-      <footer className="bg-petrol-dark py-12 px-6 text-center border-t border-white/5">
-        <p className="text-white/30 text-[10px] uppercase tracking-[2px] mb-2 leading-relaxed">
-          DRA. GISELE MILÃO DE CARVALHO COSTA · CREFITO 126817-F · FISIOTERAPIA EM DTM E DOR OROFACIAL
-        </p>
-        <p className="text-white/30 text-[10px] uppercase tracking-[2px]">
-          © 2026 · <button className="text-gold hover:text-gold-light transition-colors text-[10px] uppercase tracking-[1px]" onClick={() => {setIsModalOpen(true); document.body.style.overflow='hidden'}}>Política de Privacidade</button>
-        </p>
-      </footer>
+      <Footer />
+    </>
+  );
+};
 
-      {/* MODAL */}
-      <AnimatePresence>
-        {isModalOpen && (
-          <div className="fixed inset-0 z-[999] p-5 flex items-center justify-center">
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="absolute inset-0 bg-petrol-dark/90 backdrop-blur-sm"
-              onClick={() => {setIsModalOpen(false); document.body.style.overflow='auto'}}
-            />
-            <motion.div
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
-              className="modal-box relative bg-white w-full max-w-[700px] max-h-[85vh] overflow-y-auto rounded-3xl p-12 shadow-2xl z-[1000]"
-            >
-              <button 
-                className="absolute top-5 right-6 text-3xl text-text-muted cursor-pointer hover:text-petrol-dark transition-colors"
-                onClick={() => {setIsModalOpen(false); document.body.style.overflow='auto'}}
-              >
-                &times;
-              </button>
-              <h2 className="font-display text-[2rem] text-petrol-dark mb-2 pb-4 border-b border-gold">Política de Privacidade</h2>
-              <p className="text-[11px] text-text-muted mb-6">Última atualização: abril de 2026</p>
-              
-              <div className="space-y-4 text-[0.9rem] text-text-muted font-light leading-[1.8]">
-                <p>Sua privacidade é importante para nós. Esta política explica de forma clara e objetiva quais informações coletamos, como as utilizamos e quais são os seus direitos — em conformidade com a Lei Geral de Proteção de Dados (LGPD · Lei nº 13.709/2018).</p>
-                
-                <h3 className="font-sans font-semibold text-petrol-dark text-[0.95rem] mt-5">1. Quem somos</h3>
-                <p>Dra. Gisele Milão de Carvalho Costa, fisioterapeuta especialista em DTM e Dor Orofacial, CREFITO 126817-F, Juiz de Fora – MG.</p>
-                
-                <h3 className="font-sans font-semibold text-petrol-dark text-[0.95rem] mt-5">2. Quais dados coletamos</h3>
-                <p>Este site não possui formulários de cadastro. Os dados coletados são apenas os fornecidos voluntariamente via WhatsApp: nome e telefone para agendamento. Este site pode utilizar ferramentas como Google Analytics, Google Ads e Meta Pixel para mensurar desempenho e veicular anúncios relevantes. Essas ferramentas coletam dados como IP e comportamento de navegação de forma anonimizada. Você pode desativar o rastreamento nas configurações do seu navegador.</p>
-                
-                <h3 className="font-sans font-semibold text-petrol-dark text-[0.95rem] mt-5">3. Para que usamos seus dados</h3>
-                <p>Exclusivamente para responder contatos, realizar agendamentos e enviar orientações relacionadas ao atendimento.</p>
-                
-                <h3 className="font-sans font-semibold text-petrol-dark text-[0.95rem] mt-5">4. Compartilhamento de dados</h3>
-                <p>Seus dados não são vendidos, alugados ou compartilhados com terceiros para fins comerciais. Compartilhamento ocorre apenas por obrigação legal ou com sua autorização.</p>
-                
-                <h3 className="font-sans font-semibold text-petrol-dark text-[0.95rem] mt-5">5. Por quanto tempo guardamos seus dados</h3>
-                <p>Pelo tempo necessário para prestação do serviço e cumprimento de obrigações legais.</p>
-                
-                <h3 className="font-sans font-semibold text-petrol-dark text-[0.95rem] mt-5">6. Seus direitos como titular</h3>
-                <p>Conforme a LGPD você tem direito a confirmar, acessar, corrigir, excluir seus dados e revogar consentimento. Entre em contato pelo WhatsApp: (32) 98874-8235.</p>
-                
-                <h3 className="font-sans font-semibold text-petrol-dark text-[0.95rem] mt-5">7. Segurança</h3>
-                <p>Adotamos medidas para proteger suas informações. Conversas pelo WhatsApp usam criptografia de ponta a ponta.</p>
-                
-                <h3 className="font-sans font-semibold text-petrol-dark text-[0.95rem] mt-5">8. Alterações</h3>
-                <p>Esta política pode ser atualizada. A data de revisão estará sempre no topo desta página.</p>
-                
-                <h3 className="font-sans font-semibold text-petrol-dark text-[0.95rem] mt-5">9. Contato</h3>
-                <p>Dra. Gisele Milão de Carvalho Costa · WhatsApp: (32) 98874-8235 · Juiz de Fora – MG · CREFITO 126817-F</p>
-              </div>
-            </motion.div>
+const PrivacyPolicy = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  return (
+    <div className="min-h-screen bg-white">
+      <div className="max-w-[800px] mx-auto px-6 py-20">
+        <Link to="/" className="inline-flex items-center gap-2 text-gold hover:text-gold-light transition-colors mb-12 font-medium">
+          <ChevronLeft />
+          Voltar para o site
+        </Link>
+        
+        <h1 className="font-display text-5xl text-petrol-dark mb-4 pb-6 border-b border-gold/30">Política de Privacidade</h1>
+        <p className="text-sm text-text-muted mb-10 font-sans tracking-wide">Última atualização: abril de 2026</p>
+        
+        <div className="space-y-8 text-[1.05rem] text-text-muted font-light leading-[1.8]">
+          <p>Sua privacidade é importante para nós. Esta política explica de forma clara e objetiva quais informações coletamos, como as utilizamos e quais são os seus direitos — em conformidade com a Lei Geral de Proteção de Dados (LGPD · Lei nº 13.709/2018).</p>
+          
+          <div>
+            <h3 className="font-sans font-bold text-petrol-dark text-xl mb-3">1. Quem somos</h3>
+            <p>Dra. Gisele Milão de Carvalho Costa, fisioterapeuta especialista em DTM e Dor Orofacial, CREFITO 126817-F, Juiz de Fora – MG.</p>
           </div>
-        )}
-      </AnimatePresence>
+          
+          <div>
+            <h3 className="font-sans font-bold text-petrol-dark text-xl mb-3">2. Quais dados coletamos</h3>
+            <p>Este site não possui formulários de cadastro. Os dados coletados são apenas os fornecidos voluntariamente via WhatsApp: nome e telefone para agendamento. Este site pode utilizar ferramentas como Google Analytics, Google Ads e Meta Pixel para mensurar desempenho e veicular anúncios relevantes. Essas ferramentas coletam dados como IP e comportamento de navegação de forma anonimizada. Você pode desativar o rastreamento nas configurações do seu navegador.</p>
+          </div>
+          
+          <div>
+            <h3 className="font-sans font-bold text-petrol-dark text-xl mb-3">3. Para que usamos seus dados</h3>
+            <p>Exclusivamente para responder contatos, realizar agendamentos e enviar orientações relacionadas ao atendimento.</p>
+          </div>
+          
+          <div>
+            <h3 className="font-sans font-bold text-petrol-dark text-xl mb-3">4. Compartilhamento de dados</h3>
+            <p>Seus dados não são vendidos, alugados ou compartilhados com terceiros para fins comerciais. Compartilhamento ocorre apenas por obrigação legal ou com sua autorização.</p>
+          </div>
+          
+          <div>
+            <h3 className="font-sans font-bold text-petrol-dark text-xl mb-3">5. Por quanto tempo guardamos seus dados</h3>
+            <p>Pelo tempo necessário para prestação do serviço e cumprimento de obrigações legais.</p>
+          </div>
+          
+          <div>
+            <h3 className="font-sans font-bold text-petrol-dark text-xl mb-3">6. Seus direitos como titular</h3>
+            <p>Conforme a LGPD você tem direito a confirmar, acessar, corrigir, excluir seus dados e revogar consentimento. Entre em contato pelo WhatsApp: (32) 98874-8235.</p>
+          </div>
+          
+          <div>
+            <h3 className="font-sans font-bold text-petrol-dark text-xl mb-3">7. Segurança</h3>
+            <p>Adotamos medidas para proteger suas informações. Conversas pelo WhatsApp usam criptografia de ponta a ponta.</p>
+          </div>
+          
+          <div>
+            <h3 className="font-sans font-bold text-petrol-dark text-xl mb-3">8. Alterações</h3>
+            <p>Esta política pode ser atualizada. A data de revisão estará sempre no topo desta página.</p>
+          </div>
+          
+          <div>
+            <h3 className="font-sans font-bold text-petrol-dark text-xl mb-3">9. Contato</h3>
+            <p>Dra. Gisele Milão de Carvalho Costa · WhatsApp: (32) 98874-8235 · Juiz de Fora – MG · CREFITO 126817-F</p>
+          </div>
+        </div>
 
+        <div className="mt-20 pt-10 border-t border-gold/20">
+          <Link to="/" className="btn-dark">
+            <ChevronLeft />
+            Voltar para o site
+          </Link>
+        </div>
+      </div>
+      <Footer />
     </div>
+  );
+};
+
+const Footer = () => (
+  <footer className="bg-petrol-dark py-16 px-6 text-center border-t border-white/5">
+    <p className="text-white/40 text-[11px] uppercase tracking-[3px] mb-4 leading-relaxed font-medium">
+      DRA. GISELE MILÃO DE CARVALHO COSTA · CREFITO 126817-F · FISIOTERAPIA EM DTM E DOR OROFACIAL
+    </p>
+    <p className="text-white/40 text-[11px] uppercase tracking-[3px]">
+      © 2026 · <Link to="/politica-de-privacidade.html" className="text-gold hover:text-gold-light transition-colors decoration-transparent shadow-none" style={{ textDecoration: 'none' }}>Política de Privacidade</Link>
+    </p>
+  </footer>
+);
+
+// --- Main App ---
+
+export default function App() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/politica-de-privacidade.html" element={<PrivacyPolicy />} />
+        {/* Supporting both variants just in case */}
+        <Route path="/politica-de-privacidade" element={<PrivacyPolicy />} />
+      </Routes>
+    </Router>
   );
 }

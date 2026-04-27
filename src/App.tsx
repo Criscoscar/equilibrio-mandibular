@@ -290,6 +290,9 @@ export default function App() {
         <p className="text-white/30 text-[10px] uppercase tracking-[2px] mb-2 leading-relaxed">
           DRA. GISELE MILÃO DE CARVALHO COSTA · CREFITO 126817-F · FISIOTERAPIA EM DTM E DOR OROFACIAL
         </p>
+        <p className="text-white/30 text-[10px] uppercase tracking-[2px] mb-2">
+          Rua São Mateus, 846. Bairro São Mateus - Juiz de Fora - MG
+        </p>
         <p className="text-white/30 text-[10px] uppercase tracking-[2px]">
           © 2026 · <button className="text-gold hover:text-gold-light transition-colors text-[10px] uppercase tracking-[1px] cursor-pointer" onClick={() => {setIsModalOpen(true); document.body.style.overflow='hidden'}}>Política de Privacidade</button>
         </p>
